@@ -1,15 +1,12 @@
 # VoteSmart
 
-This project allows users to see who their federal and local representatives are based on their address.
-
-## How to Use
+## Application
 https://votesmartflatiron.herokuapp.com/
 
 ## Code Style
-
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
-## Usage
+## Purpose
 
 This project allows users to see who their federal and local representatives are based on their address.
 
