@@ -2,6 +2,9 @@
 
 Foobar is a Python library for dealing with word pluralization.
 
+## How to Use
+https://votesmartflatiron.herokuapp.com/
+
 ## Code Style
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
