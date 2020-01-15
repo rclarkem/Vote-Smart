@@ -17,7 +17,7 @@ https://votesmartflatiron.herokuapp.com/
 ## Project Description
 
 #### Overview: 
-The idea is to implement a simple single-page application (SPA) using the vanilla JavaScript script.
+The idea is to implement a simple single-page application (SPA) using the vanilla JavaScript.
 
 #### Challenges:
 Fetching and handling events using Vanilla Js, instead of using React, this project made sure to focus on fetching.
