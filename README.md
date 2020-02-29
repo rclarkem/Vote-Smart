@@ -7,12 +7,12 @@ https://votesmartflatiron.herokuapp.com/
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 ## Technologies
-* Vanilla Javascript for the Front-end
-* Rails API for the Back-end
-* PostgreSQL as a backend Database-API
+* [Vanilla Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) for the Front-end
+* [Rails API](https://rubyonrails.org/) for the Back-end
+* [PostgreSQL](https://www.postgresql.org/) as a backend Database-API
 * Fetching data to the backend
 * Plain CSS and BootstrapCDN
-* Animate.CSS for animations
+* [Animate.CSS](https://daneden.github.io/animate.css/) for animations
 
 ## Project Description
 
