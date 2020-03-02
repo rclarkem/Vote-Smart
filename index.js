@@ -225,14 +225,15 @@ function renderMember(member, row) {
 	createAndAppendElement('img', cardBody, null, 'container', element => {
 		element.height = 400
 		if (member.photoUrl === undefined) {
-			element.src = 'https://i.imgur.com/zucVdwH.png'
+			element.src =
+				'https://clinicforspecialchildren.org/wp-content/uploads/2016/08/avatar-placeholder.gif'
 		} else {
 			element.src = member.photoUrl
 		}
 	})
 
 	createAndAppendElement('h5', cardBody, null, 'card-office', el => {
-		el.style = 'white-space: nowrap; overflow:hidden;'
+		el.style = 'white-space: overflow:hidden;'
 		el.innerText = member.title
 	})
 	createAndAppendElement('h6', cardBody, null, 'card-name', el => {
@@ -244,9 +245,6 @@ function renderMember(member, row) {
 		null,
 		'd-flex justify-content-between align-items-center',
 	)
-	// if (member.channels[1] !== undefined) {
-	//   socialIcons(cardBody, member)
-	// }
 	createAndAppendElement(
 		'div',
 		buttonDiv,
