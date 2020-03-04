@@ -2,6 +2,7 @@
 
 ## Demo
 
+[!DemoGif](https://github.com/rclarkem/Vote-Smart/blob/master/2020-03-03%2019-14-27.2020-03-03%2019_29_55.gif)
 
 
 ## Code Style
