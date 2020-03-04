@@ -98,40 +98,23 @@ function formUserComponents(smallCol, user, formRow) {
 		element.innerText = 'Username'
 	})
 	const inputGroup = createAndAppendElement('div', smallCol, null, 'input-group')
-	const inputGroupPrepend = createAndAppendElement(
-		'div',
-		inputGroup,
-		null,
-		'input-group-prepend',
-	)
+	const inputGroupPrepend = createAndAppendElement('div', inputGroup, null, 'input-group-prepend')
 	createAndAppendElement('div', inputGroupPrepend, null, 'input-group-text', el => {
 		el.innerText = '@'
 	})
-	createAndAppendElement(
-		'input',
-		inputGroup,
-		'inlineFormInputGroupUsername',
-		'form-control',
-		element => {
-			if (user !== null) {
-				element.value = user.username
-				element.disabled = true
-			} else {
-				element.placeholder = 'Enter Username'
-				element.disabled = false
-			}
-		},
-	)
+	createAndAppendElement('input', inputGroup, 'inlineFormInputGroupUsername', 'form-control', element => {
+		if (user !== null) {
+			element.value = user.username
+			element.disabled = true
+		} else {
+			element.placeholder = 'Enter Username'
+			element.disabled = false
+		}
+	})
 	const buttonCol = createAndAppendElement('div', formRow, 'address-submit', 'col-sm-3 my-1')
-	createAndAppendElement(
-		'button',
-		buttonCol,
-		'username-submit',
-		'btn btn-primary',
-		element => {
-			element.innerText = 'Submit'
-		},
-	)
+	createAndAppendElement('button', buttonCol, 'username-submit', 'btn btn-primary', element => {
+		element.innerText = 'Submit'
+	})
 	addressForm.removeEventListener('submit', updateFormEventListener)
 	addressForm.addEventListener('submit', submitForm)
 }
@@ -179,12 +162,7 @@ function showMyVotesEvent(event) {
 		.then(bills => {
 			while (columnDiv.firstChild) columnDiv.removeChild(columnDiv.firstChild)
 			const row = createAndAppendElement('div', columnDiv, null, 'row')
-			const col = createAndAppendElement(
-				'div',
-				row,
-				'my-votes-col',
-				'col-sm-12 d-flex flex-column wrapper',
-			)
+			const col = createAndAppendElement('div', row, 'my-votes-col', 'col-sm-12 d-flex flex-column wrapper')
 			for (const bill of bills) {
 				appendBillToDom(bill, col)
 			}
@@ -225,8 +203,7 @@ function renderMember(member, row) {
 	createAndAppendElement('img', cardBody, null, 'container', element => {
 		element.height = 400
 		if (member.photoUrl === undefined) {
-			element.src =
-				'https://clinicforspecialchildren.org/wp-content/uploads/2016/08/avatar-placeholder.gif'
+			element.src = 'https://clinicforspecialchildren.org/wp-content/uploads/2016/08/avatar-placeholder.gif'
 		} else {
 			element.src = member.photoUrl
 		}
@@ -245,12 +222,7 @@ function renderMember(member, row) {
 		null,
 		'd-flex justify-content-between align-items-center',
 	)
-	createAndAppendElement(
-		'div',
-		buttonDiv,
-		`btn-group-${member.name.replace(/[." "]/g, '-')}`,
-		'btn-group',
-	)
+	createAndAppendElement('div', buttonDiv, `btn-group-${member.name.replace(/[." "]/g, '-')}`, 'btn-group')
 	row.append(card)
 	makeButton(member)
 	// debugger;
@@ -279,22 +251,16 @@ function patchAddress(id, address) {
 
 function makeButton(member) {
 	const buttonDiv = document.querySelector(`#btn-group-${member.name.replace(/[." "]/g, '-')}`)
-	createAndAppendElement(
-		'button',
-		buttonDiv,
-		null,
-		'btn btn-sm btn-outline-secondary',
-		element => {
-			element.innerText = 'Details'
-			element.className = 'btn btn-sm btn-outline-secondary'
-			element.setAttribute('data-toggle', 'modal')
-			element.setAttribute('data-target', '.bd-example-modal-xl')
-			element.dataset.id = member.id
-			element.addEventListener('click', () => {
-				representativeModalElements(member)
-			})
-		},
-	)
+	createAndAppendElement('button', buttonDiv, null, 'btn btn-sm btn-outline-secondary', element => {
+		element.innerText = 'Details'
+		element.className = 'btn btn-sm btn-outline-secondary'
+		element.setAttribute('data-toggle', 'modal')
+		element.setAttribute('data-target', '.bd-example-modal-xl')
+		element.dataset.id = member.id
+		element.addEventListener('click', () => {
+			representativeModalElements(member)
+		})
+	})
 }
 
 // function socialIcons (cardBody, member) {
@@ -319,7 +285,7 @@ function representativeModalElements(member) {
 	tableBody.innerHTML = ''
 	const tr1 = createAndAppendElement('tr', tableBody, null, null)
 	createAndAppendElement('td', tr1, null, null, el => {
-		if (member.phone === undefined) {
+		if (member.phones === undefined) {
 			el.innerText = 'Not Available'
 		} else {
 			el.innerText = member.phones[0]
@@ -387,17 +353,11 @@ function representativeModalElements(member) {
 
 function makeButtonForBills(member) {
 	const buttonDiv = document.querySelector(`#btn-group-${member.name.replace(/[." "]/g, '-')}`)
-	createAndAppendElement(
-		'button',
-		buttonDiv,
-		null,
-		'btn btn-sm btn-outline-secondary',
-		element => {
-			element.innerText = 'Bills'
-			element.dataset.proPublica_id = member.proPublica_id
-			element.addEventListener('click', wantToSeeActiveBills)
-		},
-	)
+	createAndAppendElement('button', buttonDiv, null, 'btn btn-sm btn-outline-secondary', element => {
+		element.innerText = 'Bills'
+		element.dataset.proPublica_id = member.proPublica_id
+		element.addEventListener('click', wantToSeeActiveBills)
+	})
 }
 
 function wantToSeeActiveBills(event) {
@@ -443,12 +403,7 @@ function appendBillsToDOM(bills, row) {
 }
 
 function appendBillToDom(bill, col) {
-	const card = createAndAppendElement(
-		'div',
-		col,
-		`card-${bill.bill_id}`,
-		'card flex-fill mb-4 shadow',
-	)
+	const card = createAndAppendElement('div', col, `card-${bill.bill_id}`, 'card flex-fill mb-4 shadow')
 	createCardBody(card, bill)
 }
 
@@ -488,12 +443,7 @@ function insertBillButtons(card, bill, cardBody) {
 }
 
 function addAgreeButtons(card, bill) {
-	const footer = createAndAppendElement(
-		'div',
-		card,
-		`card-footer-${bill.bill_id}`,
-		'card-footer',
-	)
+	const footer = createAndAppendElement('div', card, `card-footer-${bill.bill_id}`, 'card-footer')
 	const footerRow = createAndAppendElement('div', footer, null, 'row w-100')
 	const agreeCol = createAndAppendElement('div', footerRow, null, 'col-6')
 	agreeButton(agreeCol, bill)
@@ -502,61 +452,38 @@ function addAgreeButtons(card, bill) {
 }
 
 function agreeButton(agreeCol, bill) {
-	createAndAppendElement(
-		'div',
-		agreeCol,
-		'btn-vote-for',
-		'btn btn-success btn-lg btn-block',
-		el => {
-			el.innerText = 'Agree'
-			el.dataset.vote = 'true'
-			el.dataset.billId = bill.bill_id
-			el.dataset.sponsorId = bill.sponsor_id
-			el.addEventListener('click', voteForBill)
-		},
-	)
+	createAndAppendElement('div', agreeCol, 'btn-vote-for', 'btn btn-success btn-lg btn-block', el => {
+		el.innerText = 'Agree'
+		el.dataset.vote = 'true'
+		el.dataset.billId = bill.bill_id
+		el.dataset.sponsorId = bill.sponsor_id
+		el.addEventListener('click', voteForBill)
+	})
 }
 
 function disagreeButton(disagreeCol, bill) {
-	createAndAppendElement(
-		'div',
-		disagreeCol,
-		'btn-vote-against',
-		'btn btn-danger btn-lg btn-block',
-		el => {
-			el.innerText = 'Disagree'
-			el.dataset.vote = 'false'
-			el.dataset.billId = bill.bill_id
-			el.dataset.sponsorId = bill.sponsor_id
-			el.addEventListener('click', voteForBill)
-		},
-	)
+	createAndAppendElement('div', disagreeCol, 'btn-vote-against', 'btn btn-danger btn-lg btn-block', el => {
+		el.innerText = 'Disagree'
+		el.dataset.vote = 'false'
+		el.dataset.billId = bill.bill_id
+		el.dataset.sponsorId = bill.sponsor_id
+		el.addEventListener('click', voteForBill)
+	})
 }
 
 function addRemoveVote(card, bill) {
-	const footer = createAndAppendElement(
-		'div',
-		card,
-		`card-footer-${bill.bill_id}`,
-		'card-footer',
-	)
+	const footer = createAndAppendElement('div', card, `card-footer-${bill.bill_id}`, 'card-footer')
 	const footerRow = createAndAppendElement('div', footer, null, 'row w-100 mx-auto')
 	const disagreeCol = createAndAppendElement('div', footerRow, null, 'col-12')
-	createAndAppendElement(
-		'div',
-		disagreeCol,
-		'btn-remove-vote',
-		'btn btn-danger btn-lg btn-block',
-		el => {
-			el.innerText = 'Remove my vote'
-			el.dataset.vote = 'false'
-			el.dataset.billId = bill.bill_id
-			el.dataset.sponsorId = bill.sponsor_id
-			console.log('need to add event lisenter for this!')
-			el.addEventListener('click', removeMyVoteEvent)
-			// el.addEventListener('click', voteForBill)
-		},
-	)
+	createAndAppendElement('div', disagreeCol, 'btn-remove-vote', 'btn btn-danger btn-lg btn-block', el => {
+		el.innerText = 'Remove my vote'
+		el.dataset.vote = 'false'
+		el.dataset.billId = bill.bill_id
+		el.dataset.sponsorId = bill.sponsor_id
+		console.log('need to add event lisenter for this!')
+		el.addEventListener('click', removeMyVoteEvent)
+		// el.addEventListener('click', voteForBill)
+	})
 }
 
 function removeMyVoteEvent(event) {
