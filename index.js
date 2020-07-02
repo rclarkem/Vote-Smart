@@ -284,7 +284,11 @@ function representativeModalElements(member) {
 		if (member.urls === undefined) {
 			el.innerText = 'Not Available'
 		} else {
-			el.innerText = member.urls[0]
+			let alink = document.createElement('a')
+			alink.innerText = member.urls[0]
+			alink.target= '_blank';
+			alink.href = member.urls[0]
+			el.append(alink)
 		}
 	})
 	const tr2 = createAndAppendElement('tr', tableBody, null, null)
