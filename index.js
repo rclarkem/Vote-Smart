@@ -1,5 +1,5 @@
 const columnDiv = document.querySelector('#main-row')
-columnDiv.addEventListener('animationend', event => {
+columnDiv.addEventListener('animationend', (event) => {
 	spinner.classList.add('d-none')
 })
 
@@ -27,8 +27,8 @@ function submitForm(event) {
 			},
 		}),
 	})
-		.then(r => r.json())
-		.then(user => {
+		.then((r) => r.json())
+		.then((user) => {
 			columnDiv.dataset.userId = user.id
 			myVoteAnchor.addEventListener('click', showMyVotesEvent)
 			if (user.address === null) {
@@ -51,16 +51,16 @@ function updateForm(user) {
 }
 
 function formAddressComponents(smallCol, user, formRow) {
-	createAndAppendElement('label', smallCol, null, 'sr-only', element => {
+	createAndAppendElement('label', smallCol, null, 'sr-only', (element) => {
 		element.setAttribute('for', 'inlineFormAddress')
 		element.innerText = 'Address'
 	})
-	createAndAppendElement('input', smallCol, 'inlineFormAddress', 'form-control', element => {
+	createAndAppendElement('input', smallCol, 'inlineFormAddress', 'form-control', (element) => {
 		element.dataset.id = user.id
 		element.placeholder = 'Address'
 	})
 	const buttonCol = createAndAppendElement('div', formRow, 'address-submit', 'col-sm-3 my-1')
-	createAndAppendElement('button', buttonCol, null, 'btn btn-primary', element => {
+	createAndAppendElement('button', buttonCol, null, 'btn btn-primary', (element) => {
 		element.innerText = 'Add Address'
 	})
 	addressForm.removeEventListener('submit', submitForm)
@@ -71,7 +71,7 @@ function updateFormEventListener(event) {
 	event.preventDefault()
 	const id = event.target.inlineFormAddress.dataset.id
 	const address = event.target.inlineFormAddress.value
-	patchAddress(id, address).then(userObj => {
+	patchAddress(id, address).then((userObj) => {
 		columnDiv.innerHTML = ''
 		fetchRep(userObj.id, true)
 		setupOrigianlFormDisabled(userObj, true)
@@ -93,16 +93,16 @@ function setupOrigianlFormDisabled(user, isDisabled) {
 }
 
 function formUserComponents(smallCol, user, formRow) {
-	createAndAppendElement('label', smallCol, null, 'sr-only', element => {
+	createAndAppendElement('label', smallCol, null, 'sr-only', (element) => {
 		element.setAttribute('for', 'inlineFormInputGroupUsername')
 		element.innerText = 'Username'
 	})
 	const inputGroup = createAndAppendElement('div', smallCol, null, 'input-group')
 	const inputGroupPrepend = createAndAppendElement('div', inputGroup, null, 'input-group-prepend')
-	createAndAppendElement('div', inputGroupPrepend, null, 'input-group-text', el => {
+	createAndAppendElement('div', inputGroupPrepend, null, 'input-group-text', (el) => {
 		el.innerText = '@'
 	})
-	createAndAppendElement('input', inputGroup, 'inlineFormInputGroupUsername', 'form-control', element => {
+	createAndAppendElement('input', inputGroup, 'inlineFormInputGroupUsername', 'form-control', (element) => {
 		if (user !== null) {
 			element.value = user.username
 			element.disabled = true
@@ -112,7 +112,7 @@ function formUserComponents(smallCol, user, formRow) {
 		}
 	})
 	const buttonCol = createAndAppendElement('div', formRow, 'address-submit', 'col-sm-3 my-1')
-	createAndAppendElement('button', buttonCol, 'username-submit', 'btn btn-primary', element => {
+	createAndAppendElement('button', buttonCol, 'username-submit', 'btn btn-primary', (element) => {
 		element.innerText = 'Submit'
 	})
 	addressForm.removeEventListener('submit', updateFormEventListener)
@@ -146,8 +146,8 @@ function removeUser(event) {
 			Accept: 'application/json',
 		},
 	})
-		.then(response => response.json())
-		.then(success => {
+		.then((response) => response.json())
+		.then((success) => {
 			console.log('Show inital page!')
 			setupOrigianlFormDisabled(null, false)
 			while (columnDiv.firstChild) columnDiv.removeChild(columnDiv.firstChild)
@@ -158,8 +158,8 @@ function showMyVotesEvent(event) {
 	event.preventDefault()
 	const id = columnDiv.dataset.userId
 	fetch(`${event.target.href}/${id}`) //eslint-disable-line
-		.then(response => response.json())
-		.then(bills => {
+		.then((response) => response.json())
+		.then((bills) => {
 			while (columnDiv.firstChild) columnDiv.removeChild(columnDiv.firstChild)
 			const row = createAndAppendElement('div', columnDiv, null, 'row')
 			const col = createAndAppendElement('div', row, 'my-votes-col', 'col-sm-12 d-flex flex-column wrapper')
@@ -171,8 +171,8 @@ function showMyVotesEvent(event) {
 
 function fetchRep(id, federal) {
 	fetch(`http://localhost:3000/users/${id}?federal=${federal}`) //eslint-disable-line
-		.then(response => response.json())
-		.then(function(members) {
+		.then((response) => response.json())
+		.then(function (members) {
 			spinner.classList.remove('d-none')
 			console.log(members)
 			while (columnDiv.firstChild) columnDiv.removeChild(columnDiv.firstChild)
@@ -192,15 +192,10 @@ function renderMember(member, row) {
 	const card = document.createElement('div')
 	card.className = 'col-md-4'
 
-	const cardShadow = createAndAppendElement(
-		'div',
-		card,
-		null,
-		'card mb-4 shadow-sm animated bounceInRight faster',
-	)
+	const cardShadow = createAndAppendElement('div', card, null, 'card mb-4 shadow-sm animated bounceInRight faster')
 
 	const cardBody = createAndAppendElement('div', cardShadow, null, 'card-body')
-	createAndAppendElement('img', cardBody, null, 'container', element => {
+	createAndAppendElement('img', cardBody, null, 'container', (element) => {
 		element.height = 400
 		if (member.photoUrl === undefined) {
 			element.src = 'https://clinicforspecialchildren.org/wp-content/uploads/2016/08/avatar-placeholder.gif'
@@ -209,19 +204,14 @@ function renderMember(member, row) {
 		}
 	})
 
-	createAndAppendElement('h5', cardBody, null, 'card-office', el => {
+	createAndAppendElement('h5', cardBody, null, 'card-office', (el) => {
 		el.style = 'white-space: overflow:hidden;'
 		el.innerText = member.title
 	})
-	createAndAppendElement('h6', cardBody, null, 'card-name', el => {
+	createAndAppendElement('h6', cardBody, null, 'card-name', (el) => {
 		el.innerText = member.name
 	})
-	const buttonDiv = createAndAppendElement(
-		'div',
-		cardBody,
-		null,
-		'd-flex justify-content-between align-items-center',
-	)
+	const buttonDiv = createAndAppendElement('div', cardBody, null, 'd-flex justify-content-between align-items-center')
 	createAndAppendElement('div', buttonDiv, `btn-group-${member.name.replace(/[." "]/g, '-')}`, 'btn-group')
 	row.append(card)
 	makeButton(member)
@@ -246,12 +236,12 @@ function patchAddress(id, address) {
 				address: address,
 			},
 		}),
-	}).then(response => response.json())
+	}).then((response) => response.json())
 }
 
 function makeButton(member) {
 	const buttonDiv = document.querySelector(`#btn-group-${member.name.replace(/[." "]/g, '-')}`)
-	createAndAppendElement('button', buttonDiv, null, 'btn btn-sm btn-outline-secondary', element => {
+	createAndAppendElement('button', buttonDiv, null, 'btn btn-sm btn-outline-secondary', (element) => {
 		element.innerText = 'Details'
 		element.className = 'btn btn-sm btn-outline-secondary'
 		element.setAttribute('data-toggle', 'modal')
@@ -284,28 +274,28 @@ function representativeModalElements(member) {
 	const tableBody = document.querySelector('#member-info')
 	tableBody.innerHTML = ''
 	const tr1 = createAndAppendElement('tr', tableBody, null, null)
-	createAndAppendElement('td', tr1, null, null, el => {
+	createAndAppendElement('td', tr1, null, null, (el) => {
 		if (member.phones === undefined) {
 			el.innerText = 'Not Available'
 		} else {
 			el.innerText = member.phones[0]
 		}
 	})
-	createAndAppendElement('td', tr1, null, null, el => {
+	createAndAppendElement('td', tr1, null, null, (el) => {
 		if (member.party === undefined) {
 			el.innerText = 'Not Available'
 		} else {
 			el.innerText = member.party
 		}
 	})
-	createAndAppendElement('td', tr1, null, null, el => {
+	createAndAppendElement('td', tr1, null, null, (el) => {
 		if (member.address === undefined) {
 			el.innerText = 'Not Available'
 		} else {
 			el.innerText = Object.values(member.address[0]).join(' ') || 'Not Available'
 		}
 	})
-	createAndAppendElement('td', tr1, null, null, el => {
+	createAndAppendElement('td', tr1, null, null, (el) => {
 		if (member.urls === undefined) {
 			el.innerText = 'Not Available'
 		} else {
@@ -322,7 +312,7 @@ function representativeModalElements(member) {
 	//   el.setAttribute('href', "https://twitter.com/VP?ref_src=twsrc%5Etfw")
 	// })
 	let twitterValue
-	member.channels.find(elem => {
+	member.channels.find((elem) => {
 		if (elem.type === 'Twitter') {
 			return (twitterValue = elem.id)
 		}
@@ -331,8 +321,8 @@ function representativeModalElements(member) {
 	console.log('TWitterValue', twitterValue)
 	if (twitterValue) {
 		twitterDiv.innerHTML = `<a class="twitter-timeline" data-width="500" data-tweet-limit="3" data-height="200" data-theme="light" href="https://twitter.com/${twitterValue}">Tweets by ${member.name}</a>`
-		$('#my-modal').on('shown.bs.modal', function() {
-			!(function(d, s, id) {
+		$('#my-modal').on('shown.bs.modal', function () {
+			!(function (d, s, id) {
 				var js,
 					fjs = d.getElementsByTagName(s)[0],
 					p = /^http:/.test(d.location) ? 'http' : 'https'
@@ -353,7 +343,7 @@ function representativeModalElements(member) {
 
 function makeButtonForBills(member) {
 	const buttonDiv = document.querySelector(`#btn-group-${member.name.replace(/[." "]/g, '-')}`)
-	createAndAppendElement('button', buttonDiv, null, 'btn btn-sm btn-outline-secondary', element => {
+	createAndAppendElement('button', buttonDiv, null, 'btn btn-sm btn-outline-secondary', (element) => {
 		element.innerText = 'Bills'
 		element.dataset.proPublica_id = member.proPublica_id
 		element.addEventListener('click', wantToSeeActiveBills)
@@ -369,7 +359,7 @@ function wantToSeeActiveBills(event) {
 	row.append(cardLeft)
 	button.removeEventListener('click', wantToSeeActiveBills)
 	button.addEventListener('click', wantFederalReps)
-	getBillsFor(button).then(bills => {
+	getBillsFor(button).then((bills) => {
 		spinner.classList.remove('d-none')
 		appendBillsToDOM(bills, row)
 		window.scrollTo(0, document.querySelector('.jumbotron').clientHeight)
@@ -378,7 +368,7 @@ function wantToSeeActiveBills(event) {
 
 function getBillsFor(button) {
 	return fetch(`http://localhost:3000/representatives/${button.dataset.proPublica_id}`) //eslint-disable-line
-		.then(response => response.json())
+		.then((response) => response.json())
 }
 
 function wantFederalReps(event) {
@@ -390,12 +380,7 @@ function wantFederalReps(event) {
 }
 
 function appendBillsToDOM(bills, row) {
-	const col = createAndAppendElement(
-		'div',
-		row,
-		null,
-		'col-sm-8 d-flex flex-column wrapper animated bounceInUp slow',
-	)
+	const col = createAndAppendElement('div', row, null, 'col-sm-8 d-flex flex-column wrapper animated bounceInUp slow')
 	// col.addEventListener('animationend', (event) => { spinner.classList.add('d-none') })
 	for (const bill of bills) {
 		appendBillToDom(bill, col)
@@ -408,19 +393,14 @@ function appendBillToDom(bill, col) {
 }
 
 function createCardBody(card, bill) {
-	createAndAppendElement('div', card, null, 'card-header', el => {
+	createAndAppendElement('div', card, null, 'card-header', (el) => {
 		el.innerText = bill.short_title
 	})
-	const cardBody = createAndAppendElement(
-		'div',
-		card,
-		`card-body-${bill.bill_id}`,
-		'card-body d-flex flex-column',
-	)
-	createAndAppendElement('i', cardBody, null, 'text-muted align-self-end', el => {
+	const cardBody = createAndAppendElement('div', card, `card-body-${bill.bill_id}`, 'card-body d-flex flex-column')
+	createAndAppendElement('i', cardBody, null, 'text-muted align-self-end', (el) => {
 		el.innerText = `Introduced on: ${bill.introduced_date}`
 	})
-	createAndAppendElement('div', cardBody, null, 'mt-2 mb-4', el => {
+	createAndAppendElement('div', cardBody, null, 'mt-2 mb-4', (el) => {
 		el.innerText = bill.title
 	})
 	insertBillButtons(card, bill, cardBody)
@@ -433,7 +413,7 @@ function createCardBody(card, bill) {
 
 function insertBillButtons(card, bill, cardBody) {
 	if (bill.userforBill !== undefined) {
-		createAndAppendElement('em', cardBody, null, 'text-muted align-self-end', el => {
+		createAndAppendElement('em', cardBody, null, 'text-muted align-self-end', (el) => {
 			el.innerText = bill.userforBill ? 'You support this!' : 'You do not support this bill!'
 		})
 		addRemoveVote(card, bill)
@@ -452,7 +432,7 @@ function addAgreeButtons(card, bill) {
 }
 
 function agreeButton(agreeCol, bill) {
-	createAndAppendElement('div', agreeCol, 'btn-vote-for', 'btn btn-success btn-lg btn-block', el => {
+	createAndAppendElement('div', agreeCol, 'btn-vote-for', 'btn btn-success btn-lg btn-block', (el) => {
 		el.innerText = 'Agree'
 		el.dataset.vote = 'true'
 		el.dataset.billId = bill.bill_id
@@ -462,7 +442,7 @@ function agreeButton(agreeCol, bill) {
 }
 
 function disagreeButton(disagreeCol, bill) {
-	createAndAppendElement('div', disagreeCol, 'btn-vote-against', 'btn btn-danger btn-lg btn-block', el => {
+	createAndAppendElement('div', disagreeCol, 'btn-vote-against', 'btn btn-danger btn-lg btn-block', (el) => {
 		el.innerText = 'Disagree'
 		el.dataset.vote = 'false'
 		el.dataset.billId = bill.bill_id
@@ -475,7 +455,7 @@ function addRemoveVote(card, bill) {
 	const footer = createAndAppendElement('div', card, `card-footer-${bill.bill_id}`, 'card-footer')
 	const footerRow = createAndAppendElement('div', footer, null, 'row w-100 mx-auto')
 	const disagreeCol = createAndAppendElement('div', footerRow, null, 'col-12')
-	createAndAppendElement('div', disagreeCol, 'btn-remove-vote', 'btn btn-danger btn-lg btn-block', el => {
+	createAndAppendElement('div', disagreeCol, 'btn-remove-vote', 'btn btn-danger btn-lg btn-block', (el) => {
 		el.innerText = 'Remove my vote'
 		el.dataset.vote = 'false'
 		el.dataset.billId = bill.bill_id
@@ -499,8 +479,8 @@ function removeMyVoteEvent(event) {
 			user_id: columnDiv.dataset.userId,
 		}),
 	})
-		.then(r => r.json())
-		.then(bill => {
+		.then((r) => r.json())
+		.then((bill) => {
 			console.log('in remove my vote')
 			const card = document.querySelector(`#card-${bill.bill_id}`)
 			console.log(card.parentElement)
@@ -515,7 +495,7 @@ function removeMyVoteEvent(event) {
 
 function voteForBill(event) {
 	const userId = columnDiv.dataset.userId
-	voteBillPOST(userId, event).then(bill => {
+	voteBillPOST(userId, event).then((bill) => {
 		const card = document.querySelector(`#card-${bill.bill_id}`)
 		card.innerHTML = ''
 		createCardBody(card, bill)
@@ -538,7 +518,7 @@ function voteBillPOST(userId, event) {
 				vote: event.target.dataset.vote,
 			},
 		}),
-	}).then(response => response.json())
+	}).then((response) => response.json())
 }
 
 function createAndAppendElement(tag, parent, id, className, callback) {
@@ -554,14 +534,14 @@ function createAndAppendElement(tag, parent, id, className, callback) {
 const local = document.querySelector('#local-items')
 const fed = document.querySelector('#federal-items')
 // const arr = [local,federal]
-local.addEventListener('click', function() {
+local.addEventListener('click', function () {
 	fetchRep(columnDiv.dataset.userId, false)
 })
 
-fed.addEventListener('click', function() {
+fed.addEventListener('click', function () {
 	fetchRep(columnDiv.dataset.userId, true)
 })
 
-homeButton.addEventListener('click', function() {
+homeButton.addEventListener('click', function () {
 	fetchRep(columnDiv.dataset.userId, true)
 })
