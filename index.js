@@ -253,21 +253,6 @@ function makeButton(member) {
 	})
 }
 
-// function socialIcons (cardBody, member) {
-//   createAndAppendElement('i', cardBody, null, 'fa fa-twitter', (el) => {
-
-//     // check for what spcials and add the buttons
-//     el.dataset.twitter = member.channels[1].id
-//     el.addEventListener('click', (event) => {
-//       createAndAppendElement('a', cardBody, null, "twitter-timeline", (el) => {
-//         el.innerText = `Tweets by ${member.name}`
-//       })
-//       // <a class="twitter-timeline" href=`https://twitter.com/VP?ref_src=twsrc%5Etfw`>Tweets by VP</a>
-//       window.location.href = `https://twitter.com/${member.channels[1].id}?ref_src=twsrc%5Etfw`
-//     })
-//   })
-// }
-
 function representativeModalElements(member) {
 	const modalTitle = document.querySelector('#modal-title')
 	modalTitle.innerText = member.name
@@ -304,7 +289,7 @@ function representativeModalElements(member) {
 	})
 	const tr2 = createAndAppendElement('tr', tableBody, null, null)
 	const twitterDiv = document.querySelector('#twitter-div')
-	console.log(twitterDiv)
+	// console.log(twitterDiv)
 	// createAndAppendElement('a', twitterDiv, null, "twitter-timeline", (el) => {
 	//   el.setAttribute('data-width', '500')
 	//   el.setAttribute('data-height', '200')
@@ -338,8 +323,6 @@ function representativeModalElements(member) {
 		twitterDiv.innerText = 'Not Available'
 	}
 }
-
-// const twitterDiv = (document.querySelector('#twitter-div').innerHTML = '')
 
 function makeButtonForBills(member) {
 	const buttonDiv = document.querySelector(`#btn-group-${member.name.replace(/[." "]/g, '-')}`)
