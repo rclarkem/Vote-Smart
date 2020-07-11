@@ -292,13 +292,6 @@ function representativeModalElements(member) {
 	})
 	const tr2 = createAndAppendElement('tr', tableBody, null, null)
 	const twitterDiv = document.querySelector('#twitter-div')
-	// console.log(twitterDiv)
-	// createAndAppendElement('a', twitterDiv, null, "twitter-timeline", (el) => {
-	//   el.setAttribute('data-width', '500')
-	//   el.setAttribute('data-height', '200')
-	//   el.setAttribute('data-theme', 'light')
-	//   el.setAttribute('href', "https://twitter.com/VP?ref_src=twsrc%5Etfw")
-	// })
 	let twitterValue
 	member.channels.find((elem) => {
 		if (elem.type === 'Twitter') {
