@@ -1,8 +1,8 @@
 # VoteSmart
 
-## application
+still testing
 
-https://vote-smart.vercel.app/
+## application
 
 ## Demo
 
