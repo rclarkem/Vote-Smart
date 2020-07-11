@@ -453,6 +453,8 @@ function addRemoveVote(card, bill) {
 
 function removeMyVoteEvent(event) {
 	console.log('remove event button pressed.')
+	console.log('URL', `https://votesmartrep.herokuapp.com/bills/voted/${event.target.dataset.billId}`)
+	console.log('USER', columnDiv.dataset.userId)
 	fetch(`https://votesmartrep.herokuapp.com/bills/voted/${event.target.dataset.billId}`, {
 		//eslint-disable-line
 		method: 'DELETE',
