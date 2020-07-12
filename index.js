@@ -14,7 +14,7 @@ function submitForm(event) {
 	event.preventDefault();
 	// const addressValue = event.target.inlineFormAddress.value
 	const username = event.target.inlineFormInputGroupUsername.value.toLowerCase();
-	fetch('http://localhost:3000/users', {
+	fetch('https://votesmartrep.herokuapp.com/users', {
 		//eslint-disable-line
 		method: 'POST',
 		headers: {
@@ -144,7 +144,7 @@ function disableInputArea() {
 function removeUser(event) {
 	event.preventDefault();
 	const id = columnDiv.dataset.userId;
-	fetch(`http://localhost:3000/users/${id}`, {
+	fetch(`https://votesmartrep.herokuapp.com/users/${id}`, {
 		//eslint-disable-line
 		method: 'DELETE',
 		headers: {
@@ -164,7 +164,7 @@ function showMyVotesEvent(event) {
 	event.preventDefault();
 	const id = columnDiv.dataset.userId;
 	console.log(`${event.target}/${id}`);
-	fetch(`http://localhost:3000/bills/voted/${id}`) //eslint-disable-line
+	fetch(`https://votesmartrep.herokuapp.com/bills/voted/${id}`) //eslint-disable-line
 		.then((response) => response.json())
 		.then((bills) => {
 			while (columnDiv.firstChild) columnDiv.removeChild(columnDiv.firstChild);
@@ -182,7 +182,7 @@ function showMyVotesEvent(event) {
 }
 
 function fetchRep(id, federal) {
-	fetch(`http://localhost:3000/users/${id}?federal=${federal}`) //eslint-disable-line
+	fetch(`https://votesmartrep.herokuapp.com/users/${id}?federal=${federal}`) //eslint-disable-line
 		.then((response) => response.json())
 		.then(function (members) {
 			spinner.classList.remove('d-none');
@@ -249,7 +249,7 @@ function renderMember(member, row) {
 }
 
 function patchAddress(id, address) {
-	return fetch(`http://localhost:3000/users/${id}`, {
+	return fetch(`https://votesmartrep.herokuapp.com/users/${id}`, {
 		//eslint-disable-line
 		method: 'PATCH',
 		headers: {
@@ -386,7 +386,7 @@ function wantToSeeActiveBills(event) {
 
 function getBillsFor(button) {
 	return fetch(
-		`http://localhost:3000/representatives/${button.dataset.proPublica_id}?user_id=${columnDiv.dataset.userId}`
+		`https://votesmartrep.herokuapp.com/representatives/${button.dataset.proPublica_id}?user_id=${columnDiv.dataset.userId}`
 	) //eslint-disable-line
 		.then((response) => response.json());
 }
@@ -520,9 +520,9 @@ function addRemoveVote(card, bill) {
 
 function removeMyVoteEvent(event) {
 	console.log('remove event button pressed.');
-	console.log('URL', `http://localhost:3000/bills/voted/${event.target.dataset.billId}`);
+	// console.log('URL', `https://votesmartrep.herokuapp.com/bills/voted/${event.target.dataset.billId}`);
 	console.log('USER', columnDiv.dataset.userId);
-	fetch(`http://localhost:3000/bills/voted/${event.target.dataset.billId}`, {
+	fetch(`https://votesmartrep.herokuapp.com/bills/voted/${event.target.dataset.billId}`, {
 		//eslint-disable-line
 		method: 'DELETE',
 		headers: {
@@ -555,7 +555,7 @@ function voteForBill(event) {
 }
 
 function voteBillPOST(userId, event) {
-	return fetch(`http://localhost:3000/bills`, {
+	return fetch(`https://votesmartrep.herokuapp.com/bills`, {
 		//eslint-disable-line
 		method: 'POST',
 		headers: {
